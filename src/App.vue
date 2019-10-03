@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+
 import TheHeader from './components/TheHeader.vue';
 
 @Component({

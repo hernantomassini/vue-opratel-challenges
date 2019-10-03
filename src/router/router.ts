@@ -3,9 +3,8 @@ import Router from 'vue-router';
 import ApiChallengeHome from '../components/ApiChallenge/ApiChallengeHome.vue';
 import UIChallengeHome from '../components/UIChallenge/UIChallengeHome.vue';
 
-const ApiChallengeRoute = '/ApiChallengeRoute';
+const ApiChallengeRoute = '/ApiChallenge';
 const UiChallengeRoute = '/UIChallenge';
-
 const defaultURL = ApiChallengeRoute;
 
 export default new Router({

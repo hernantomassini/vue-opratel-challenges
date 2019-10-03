@@ -3,15 +3,22 @@
     <h1 class="header-title">¡Seleccione el Challenge!</h1>
 
     <b-button-group>
-      <b-button variant="info">API Challenge</b-button>
-      <b-button variant="warning">UI Challenge</b-button>
+
+      <router-link to="/ApiChallenge">
+        <b-button variant="info">API Challenge</b-button>
+      </router-link>
+
+      <router-link to="/UIChallenge">
+        <b-button variant="warning">UI Challenge</b-button>
+      </router-link>
+
     </b-button-group>
 
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class TheHeader extends Vue {}
