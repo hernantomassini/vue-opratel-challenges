@@ -1,9 +1,9 @@
 <template>
   <div>
     <button type="button" class="btn btn-primary mb-3 mr-3" v-on:click="addingNewUser = true">Agregar usuario</button>
-    <button type="button" class="btn btn-info mb-3">Actualizar tabla</button>
+    <button type="button" class="btn btn-info mb-3" v-on:click="refreshList">Actualizar tabla</button>
 
-    <div>
+    <div class="user-table">
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
@@ -17,27 +17,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr
+
+          <UserRow
             v-for="(userInfo, index) in editableUsers"
-            v-bind:key="userInfo.user._id">
+            v-bind:key="userInfo.user._id"
+            v-bind:position="index + 1"
+            v-bind:user="userInfo.user"
+            v-bind:canEdit="userInfo.updatingUser"
+            v-on:edit-user="editUser"
+            v-on:delete-user="deleteUser"
+            v-on:discard-user-changes="revertAllUpdateUsers"
+            v-on:save-user-changes="updateUser">
+          </UserRow>
 
-              <UserRowEditable v-if="userInfo.updatingUser"
-                v-bind:position="index + 1"
-                v-bind:user="userInfo.user">
-              </UserRowEditable>
-
-              <UserRow v-else
-                v-bind:position="index + 1"
-                v-bind:user="userInfo.user">
-              </UserRow>
-
-          </tr>
-
-          <tr v-if="addingNewUser">
-            <UserRowEditable
-              v-bind:position="users.length + 1">
-            </UserRowEditable>
-          </tr>
+          <UserRow
+            v-if="addingNewUser"
+            v-bind:position="users.length + 1"
+            v-bind:canEdit="true"
+            v-on:save-user-changes="addUser"
+            v-on:discard-user-changes="addingNewUser = false">
+          </UserRow>
 
         </tbody>
       </table>
@@ -47,11 +46,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
 
 import User from '../../models/user.model';
 import UserRow from './UserRow.vue';
-import UserRowEditable from './UserRowEditable.vue';
 
 interface EditableUsers {
   user: User;
@@ -60,7 +58,6 @@ interface EditableUsers {
 
 @Component({
   components: {
-    UserRowEditable,
     UserRow,
   },
 })
@@ -69,12 +66,45 @@ export default class UserList extends Vue {
   private editableUsers: EditableUsers[] = [];
   private addingNewUser: boolean = false;
 
-  @Watch('users')
+  @Watch('users', { immediate: true })
   private onUsersChange(users: User[]) {
     this.editableUsers = users.map((x) => ({ user: x, updatingUser: false }));
+  }
+
+  @Emit('add-user')
+  private addUser(user: User) {
+    this.addingNewUser = false;
+    return user;
+  }
+
+  @Emit('update-user')
+  private updateUser(user: User) {
+    this.editableUsers.forEach((x) => x.updatingUser = false);
+    return user;
+  }
+
+  @Emit('delete-user')
+  private deleteUser(user: User) {
+    return user;
+  }
+
+  @Emit('refresh-list')
+  private refreshList() {
+    return;
+  }
+
+  private editUser(user: User) {
+    this.editableUsers.forEach((x) => x.updatingUser = x.user === user);
+  }
+
+  private revertAllUpdateUsers() {
+    this.editableUsers.forEach((x) => x.updatingUser = false);
   }
 }
 </script>
 
 <style scoped lang="scss">
+.user-table {
+  margin-right: 20px;
+}
 </style>

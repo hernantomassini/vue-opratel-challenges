@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Meme2 Home!</h1>
+  <div class="footer-container">
   </div>
 </template>
 
@@ -8,9 +7,12 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class UIChallengeHome extends Vue {}
+export default class TheFooter extends Vue {}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.footer-container {
+  background-color: #42b983;
+  padding: 25px;
+}
 </style>

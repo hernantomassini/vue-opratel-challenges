@@ -1,11 +1,11 @@
 <template>
   <div class="header-container">
-    <h1 class="header-title">¡Seleccione el Challenge!</h1>
+    <h1 class="header-title">¡Bienvenido!</h1>
 
     <b-button-group>
 
       <router-link to="/ApiChallenge">
-        <b-button variant="info">API Challenge</b-button>
+        <b-button variant="info">Api Challenge</b-button>
       </router-link>
 
       <router-link to="/UIChallenge">
