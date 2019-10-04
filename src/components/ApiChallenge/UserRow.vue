@@ -30,17 +30,17 @@
       {{ user.phone }}
     </td>
 
-    <td v-if="canEdit">
+    <td align="center" v-if="canEdit">
       <font-awesome-icon class="action-icon" v-on:click="discardChanges" icon="times" title="Descartar cambios"/>
     </td>
-    <td v-else>
+    <td align="center" v-else>
       <font-awesome-icon class="action-icon" v-on:click="editUser" icon="edit" title="Editar"/>
     </td>
 
-    <td v-if="canEdit">
+    <td align="center" v-if="canEdit">
       <font-awesome-icon class="action-icon" v-on:click="saveChanges" icon="check" title="Guardar cambios"/>
     </td>
-    <td v-else>
+    <td align="center" v-else>
       <font-awesome-icon class="action-icon" v-on:click="deleteUser" icon="trash-alt" title="Borrar usuario"/>
     </td>
   </tr>

@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <h1 class="header-title">¡Bienvenido!</h1>
+    <h1 class="header-title">Opratel Challenge</h1>
 
     <b-button-group>
 

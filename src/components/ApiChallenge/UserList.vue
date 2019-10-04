@@ -3,7 +3,7 @@
     <button type="button" class="btn btn-primary mb-3 mr-3" v-on:click="addingNewUser = true">Agregar usuario</button>
     <button type="button" class="btn btn-info mb-3" v-on:click="refreshList">Actualizar tabla</button>
 
-    <div class="user-table">
+    <div class="responsive-table">
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
@@ -104,7 +104,7 @@ export default class UserList extends Vue {
 </script>
 
 <style scoped lang="scss">
-.user-table {
-  margin-right: 20px;
+.responsive-table {
+  overflow-x: auto;
 }
 </style>
